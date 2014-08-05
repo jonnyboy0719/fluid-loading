@@ -17,6 +17,7 @@ if ($row["avatarfull"] == NULL && $Config['apiKey'] != NULL) {
 	$APIKEY_Toggle = "Yes";
 } else {
 	$APIKEY_Toggle = "No";
+	$steamid = "Please Insert your API";
 }
 
 if ($Config['_Debug'] == true) {
@@ -33,7 +34,7 @@ if ($Config['_Debug'] == true) {
 	echo "
 			<span style='color: green;'>API Key Setup</span>: {$APIKEY_Toggle}<br>
 			<span style='color: green;'>Connected SteamID</span>: {$steamid}<br>
-			<span style='color: green;'>Current Heaeder</span>: {$img_header_base}
+			<span style='color: green;'>Current Header</span>: {$img_header_base}
 		</div>
 	";
 }

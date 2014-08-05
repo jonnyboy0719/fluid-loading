@@ -11,7 +11,6 @@ require_once "lib/config.php";
 		<meta charset="UTF-8">
 		<link rel="stylesheet" href="css/main3.css" type="text/css" media="screen">
 		<link href="css/slidershow.css" rel="stylesheet">
-		<link rel="stylesheet" href="css/jquery.maximage.css" type="text/css" media="screen" title="CSS" charset="utf-8" />
 	<!-- Change the background on map image -->
 	<?php
 		// Now call the map images
@@ -36,6 +35,12 @@ require_once "lib/config.php";
 	</head>
 	<body>
 	<ul class="slideshow">
+		<li><span></span><div><h3></h3></div></li>
+		<li><span></span><div><h3></h3></div></li>
+		<li><span></span><div><h3></h3></div></li>
+		<li><span></span><div><h3></h3></div></li>
+		<li><span></span><div><h3></h3></div></li>
+		<li><span></span><div><h3></h3></div></li>
 		<li><span></span><div><h3></h3></div></li>
 		<li><span></span><div><h3></h3></div></li>
 		<li><span></span><div><h3></h3></div></li>

@@ -42,6 +42,12 @@ require_once "lib/config.php";
 		<li><span></span><div><h3></h3></div></li>
 		<li><span></span><div><h3></h3></div></li>
 		<li><span></span><div><h3></h3></div></li>
+		<li><span></span><div><h3></h3></div></li>
+		<li><span></span><div><h3></h3></div></li>
+		<li><span></span><div><h3></h3></div></li>
+		<li><span></span><div><h3></h3></div></li>
+		<li><span></span><div><h3></h3></div></li>
+		<li><span></span><div><h3></h3></div></li>
 	</ul>
 	<!-- Deus Ex BG Image -->
 	<div class="bg"></div>
