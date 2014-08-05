@@ -52,11 +52,11 @@ if($RandMusic[$num][0] != "")
 			  (function(){
 				var widgetIframe = document.getElementById(\'sc-widget\'),
 					widget       = SC.Widget(widgetIframe);
-	
+
 				widget.bind(SC.Widget.Events.READY, function() {
 				  widget.setVolume('.$RandMusic[$num][3].');
 				});
-	
+
 			  }());
 			</script>
 			';
