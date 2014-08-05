@@ -5,7 +5,34 @@ if($RandMusic[$num][0] != "")
 {
 	if($RandMusic[$num][2] == "YouTube") {
 		$YouTube = explode("v=", $RandMusic[$num][0]);
-		echo '<iframe width="1" height="1" src="//www.youtube.com/embed/'.$YouTube[1].'?autoplay=1" frameborder="0" style="opacity: 0;"></iframe>';
+		echo "
+		<div style='width:0px;height:0px;' id=\"player\"></div>
+
+		<script>
+		  var tag = document.createElement('script');
+
+		  tag.src = 'https://www.youtube.com/iframe_api';
+		  var firstScriptTag = document.getElementsByTagName('script')[0];
+		  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+		  var player;
+		  function onYouTubeIframeAPIReady() {
+			player = new YT.Player('player', {
+			  height: '390',
+			  width: '640',
+			  videoId: '".$YouTube[1]."',
+			  events: {
+				'onReady': onPlayerReady
+			  }
+			});
+		  }
+
+		  function onPlayerReady(event) {
+			event.target.playVideo();
+			event.target.setVolume(". $RandMusic[$num][3] .");
+		  }
+		</script>
+		";
 		echo '<span style="position:absolute;top:5px;float:right;right:5px;font-size:22px;text-shadow: 0px 0px 4px rgba(255, 255, 255, 1);"><img src="images/icons/music.png" style="box-shadow: 0px 0px 15px rgba(50, 50, 50, 0);" width="16"> '. $RandMusic[$num][1] . ' <img src="images/icons/music.png" style="box-shadow: 0px 0px 15px rgba(50, 50, 50, 0);" width="16"></span>';
 	}
 	elseif($RandMusic[$num][2] == "YouTubeList") {
@@ -19,33 +46,8 @@ if($RandMusic[$num][0] != "")
 	}
 	elseif($RandMusic[$num][2] == "SoundCloud") {
 		echo '
-			<iframe width="0" height="0" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url='.$RandMusic[$num][0].'&amp;color=ff5500&amp;auto_play=true&amp;hide_related=false&amp;show_artwork=true"></iframe>
+			<iframe width="0" height="0" scrolling="no" frameborder="no" id="sc-widget" src="https://w.soundcloud.com/player/?url='.$RandMusic[$num][0].'&auto_play=true"></iframe>
 			<script src="https://w.soundcloud.com/player/api.js" type="text/javascript"></script>';
-		echo "
-			<script type=\"text/javascript\">
-			  (function(){
-				var widgetIframe = document.getElementById('sc-widget'),
-					widget       = SC.Widget(widgetIframe);
-
-				widget.bind(SC.Widget.Events.READY, function() {
-				  widget.bind(SC.Widget.Events.PLAY, function() {
-					// get information about currently playing sound
-					widget.getCurrentSound(function(currentSound) {
-					  console.log('sound ' + currentSound.get('') + 'began to play');
-					});
-				  });
-				  // get current level of volume
-				  widget.getVolume(function(volume) {
-					console.log('current volume value is ' + volume);
-				  });
-				  // set new volume level
-				  widget.setVolume(". $RandMusic[$num][3] .");
-				  // get the value of the current position
-				});
-
-			  }());
-			</script>
-			";
 		echo'
 			<span style="position:absolute;top:5px;float:right;right:5px;font-size:22px;text-shadow: 0px 0px 4px rgba(255, 255, 255, 1);"><img src="images/icons/music.png" style="box-shadow: 0px 0px 15px rgba(50, 50, 50, 0);" width="16"> '. $RandMusic[$num][1] . ' <img src="images/icons/music.png" style="box-shadow: 0px 0px 15px rgba(50, 50, 50, 0);" width="16"></span>
 		';
