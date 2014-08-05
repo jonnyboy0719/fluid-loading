@@ -46,8 +46,20 @@ if($RandMusic[$num][0] != "")
 	}
 	elseif($RandMusic[$num][2] == "SoundCloud") {
 		echo '
-			<iframe width="0" height="0" scrolling="no" frameborder="no" id="sc-widget" src="https://w.soundcloud.com/player/?url='.$RandMusic[$num][0].'&auto_play=true"></iframe>
-			<script src="https://w.soundcloud.com/player/api.js" type="text/javascript"></script>';
+			<iframe id="sc-widget" onload="MyFunction()" width="0" height="0" scrolling="no" frameborder="no" id="sc-widget" src="https://w.soundcloud.com/player/?url='.$RandMusic[$num][0].'&auto_play=true"></iframe>
+			<script src="https://w.soundcloud.com/player/api.js" type="text/javascript"></script>
+			<script type="text/javascript">
+			  (function(){
+				var widgetIframe = document.getElementById(\'sc-widget\'),
+					widget       = SC.Widget(widgetIframe);
+
+				widget.bind(SC.Widget.Events.READY, function() {
+				  widget.setVolume('.$RandMusic[$num][3].');
+				});
+
+			  }());
+			</script>
+			';
 		echo'
 			<span style="position:absolute;top:5px;float:right;right:5px;font-size:22px;text-shadow: 0px 0px 4px rgba(255, 255, 255, 1);"><img src="images/icons/music.png" style="box-shadow: 0px 0px 15px rgba(50, 50, 50, 0);" width="16"> '. $RandMusic[$num][1] . ' <img src="images/icons/music.png" style="box-shadow: 0px 0px 15px rgba(50, 50, 50, 0);" width="16"></span>
 		';
