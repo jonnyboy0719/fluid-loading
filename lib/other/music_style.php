@@ -11,6 +11,7 @@
 	height: 104px;
 	top: 5px;
 	right: 5px;
+	z-index: 5;
 }
 
 .sfx #debugger {
