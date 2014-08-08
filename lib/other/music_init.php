@@ -36,7 +36,43 @@ if($RandMusic[$num][0] != "")
 	}
 	elseif($RandMusic[$num][3] == "YouTubeList") {
 		$YouTube = explode("list=", $RandMusic[$num][0]);
-		echo '<iframe width="1" height="1" src="//www.youtube.com/embed/videoseries?list='.$YouTube[1].'&autoplay=1" frameborder="0" style="opacity: 0;"></iframe>';
+		echo "
+		<div style='width:0px;height:0px;' id=\"player\"></div>
+
+		<script>
+		  var tag = document.createElement('script');
+
+		  tag.src = 'https://www.youtube.com/iframe_api';
+		  var firstScriptTag = document.getElementsByTagName('script')[0];
+		  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+		  var player;
+		  function onYouTubeIframeAPIReady() {
+			player = new YT.Player('player', {
+			  height: '390',
+			  width: '640',
+			  events: {
+				'onReady': onPlayerReady,
+				'onStateChange': onPlayerStateChange
+			  }
+			});
+		  }
+
+		  function onPlayerReady(event) {
+			event.target.loadPlaylist({list: '".$YouTube[1]."'});
+			event.target.setShuffle(shufflePlaylist, 'true');
+			event.target.setVolume(". $RandMusic[$num][4] .");
+			event.target.playVideo();
+		  }
+		  
+		  function onPlayerStateChange(event) {
+			if (event.data == YT.PlayerState.ENDED) {
+			  event.target.nextVideo();
+			  event.target.setVolume(". $RandMusic[$num][4] .");
+			}
+		  }
+		</script>
+		";
 	}
 	elseif($RandMusic[$num][3] == "MP3") {
 		echo "<embed src='music/player.swf' id='radioplayer' name='radioplayer' quality='medium' allowScriptAccess='always' width='1' height='1' type='application/x-shockwave-flash' FlashVars='file=". $RandMusic[$num][0] ."&volume=". $RandMusic[$num][4] ."&start=0&duration=0&autostart=true&controlbar=none&dock=false&icons=false'>";
@@ -58,9 +94,7 @@ if($RandMusic[$num][0] != "")
 			</script>
 			';
 	}
-}
-if($RandMusic[$num][0] != "")
-{
+
 	echo'
 		<div class="sfx">
 			<img src="img/music/bg.png" />';
