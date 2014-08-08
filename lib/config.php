@@ -40,6 +40,19 @@ $Config['apiKey'] = "";
 /*----------------------------------------------------------------------
 ----------------------------------------------------------------------*/
 
+// Country Code
+// Note:
+// if true, this will read your IP and set the flag for you, if false, it will read your Steam Country details
+// --------------
+// Usage:
+// true - enabled
+// false - disabled
+// --------------
+$Config['countrycode'] = true;
+
+/*----------------------------------------------------------------------
+----------------------------------------------------------------------*/
+
 // InfoTab - Title
 // --------------
 $Config['InfoTab']['Title'] = "My Gmod Server";

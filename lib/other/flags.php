@@ -86,7 +86,52 @@
 			'ZM' => 'Zambia',					'ZW' => 'Zimbabwe',
 		);
 	
-	$ShowFlag = $row["loccountrycode"];
+	if ($Config['countrycode'] == false) {
+		$ShowFlag = $row["loccountrycode"];
+	} else {
+
+		function query_countrycode($ip) {
+
+			$ip = gethostbyname($ip);
+
+			if (long2ip(ip2long($ip)) == "255.255.255.255") { return "00"; }
+
+			$url = "http://api.wipmania.com/".urlencode($ip)."?".urlencode($_SERVER['HTTP_HOST']);
+
+			if (function_exists('curl_init') && function_exists('curl_setopt') && function_exists('curl_exec'))
+			{
+				$countrycod_curl = curl_init();
+
+				curl_setopt($countrycod_curl, CURLOPT_HEADER, 0);
+				curl_setopt($countrycod_curl, CURLOPT_TIMEOUT, 2);
+				curl_setopt($countrycod_curl, CURLOPT_RETURNTRANSFER, 1);
+				curl_setopt($countrycod_curl, CURLOPT_CONNECTTIMEOUT, 2);
+				curl_setopt($countrycod_curl, CURLOPT_URL, $url);
+
+				$location = curl_exec($countrycod_curl);
+
+				if (curl_error($countrycod_curl)) { $location = "00"; }
+
+				curl_close($countrycod_curl);
+			}
+			else
+			{
+				$location = @file_get_contents($url);
+			}
+
+			if (strlen($location) != 2) { $location = "00"; }
+
+			return $location;
+
+		}
+
+		$ShowFlag = query_countrycode($_SERVER['REMOTE_ADDR']);
+
+		// If it finds XX, lets force it to 00
+		if ($ShowFlag == "XX") {
+			$ShowFlag = "00";
+		}
+	}
 	
 	if ($ShowFlag == null) {
 		$ShowFlag = "00";
