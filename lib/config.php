@@ -195,4 +195,16 @@ if ($handle = opendir('lib/other/')) {
     closedir($handle);
 }
 
+// Include SQL folder
+if ($handle = opendir('lib/sql/')) {
+    while (false !== ($file = readdir($handle)))
+    {
+        if ($file != "." && $file != ".." && strtolower(substr($file, strrpos($file, '.') + 1)) == 'php')
+        {
+            $thelist .= require_once "sql/{$file}";
+        }
+    }
+    closedir($handle);
+}
+
 ?>
