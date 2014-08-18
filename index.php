@@ -74,29 +74,6 @@ require_once "lib/config.php";
 			}
 			echo '
 		</div>';
-	// Achievements
-	if ($id != null) {
-		if ($Config['Achievements'] == true) {
-			echo '<div id="steamid_achv"><span>Achievements</span>';
-				if ($frow2['completed'] >= -1)
-				{
-					while($frow = mysqli_fetch_array($row_forum))
-					{
-						if($frow['completed'] == 1)
-						{
-							echo '
-								<li><img src="images/achv/' . $frow['achievement'] . '.png" width="16"></li>
-							';
-						}
-					}
-				}
-				else
-				{
-					echo '<spin>You have no completed achievements.</spin>';
-				}
-			echo '</div>';
-		}
-	}
 	?>
 	<div class="ServerInfo">
 		<?php
