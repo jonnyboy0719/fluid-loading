@@ -82,7 +82,7 @@ require_once "lib/config.php";
 				</center>
 				<img src=" . $row["avatarfull"] . " width='100'>
 				<ul>
-					<li><img src='images/icons/user.png' width='16'> <span>" . $row["personaname"] . "</span></li>
+					<li><img src='images/icons/user.png' width='16'> <span>" . htmlspecialchars( $row["personaname"]) . "</span></li>
 					<li><img src='images/icons/key.png' width='16'> <span>STEAMID: <span class='steamid'>" . $steamid . "</span></span></li>
 					<li><img style='position: relative; top: 3.4px;' src='images/flags/{$ShowFlag}.png' width='16'> <span>Connecting from <span class='country'>" . $flags[$ShowFlag] . "</span></span></li>
 				</ul>";
