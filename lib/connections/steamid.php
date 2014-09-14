@@ -2,6 +2,11 @@
 // Get SteamID
 $id = $_GET['sid'];
 
+if( !isValidID64($id)){
+	// Use garrys id when it is broken
+	$id = "76561197960279927";
+}
+
 // Get ApiKey and SteameID
 $url = "http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=" . $Config['apiKey'] . "&steamids=" . $id;
 
@@ -32,4 +37,19 @@ if ($row["avatarfull"] == NULL && $Config['apiKey'] != NULL && $_GET['sid'] != N
 			check if its configured properly, and/or that you are connected to the Internet.</span>
 		";
 }
-?>
+
+
+     function isValidID64($sSteamID64) {
+        // anything else than a number is invalid
+        // (is_numeric() doesn't work for 64 bit integers)
+        if (!preg_match('/^\d+$/i', $sSteamID64)) {
+            return false;
+        }
+
+        // the community id must be bigger than STEAMID64_BASE
+        if (bccomp(self::STEAMID64_U, $sSteamID64) == 1) {
+            return false;
+        }
+
+        return true;
+    }
