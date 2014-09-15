@@ -9,7 +9,7 @@ if ($id != null) {
 			echo "Failed to connect to MySQL: " . mysqli_connect_error();
 		}
 	// Achievements
-	$row_achievements = mysqli_query($con,"SELECT * FROM achv_achievements WHERE steamID64=" . $id .";");
+	$row_achievements = mysqli_query($con,"SELECT * FROM achv_achievements WHERE steamID64=" . mysqli_real_escape_string($con,$id) .";");
 	$frow2 = mysqli_fetch_array($row_achievements);
 }
 ?>
